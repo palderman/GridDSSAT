@@ -3,7 +3,7 @@ write_wth_data <- function(nc_wth,lat,lon,lat_i,lon_i){
 
   dim_order <- names(nc_wth$dim)[nc_wth$var$RAIN$dimids+1]
 
-  start <- c(latitude=lat_lon_i$lat_i,longitude=lat_lon_i$lon_i,DATE=1)
+  start <- c(latitude=lat_i,longitude=lon_i,DATE=1)
   start <- start[dim_order]
 
   count <- c(latitude=1,longitude=1,DATE=-1)

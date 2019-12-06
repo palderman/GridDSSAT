@@ -3,7 +3,7 @@ write_sol_data <- function(nc_sol,lat,lon,lat_i,lon_i){
 
   dim_order <- names(nc_sol$dim)[nc_sol$var$SLB$dimids+1]
 
-  start <- c(latitude=lat_lon_i$lat_i,longitude=lat_lon_i$lon_i,layer=1)
+  start <- c(latitude=lat_i,longitude=lon_i,layer=1)
   start <- start[dim_order]
 
   count <- c(latitude=1,longitude=1,layer=-1)

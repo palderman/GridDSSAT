@@ -98,8 +98,15 @@ run_text_dssat <- function(n_dssat=3,
 
   nc_close(out_file)
 
+  mpi.bcast.cmd({
+    setwd('..')
+    unlink(paste0(work_dir,'/dssat_',mpi.comm.rank()),recursive = TRUE)
+    })
+  
   # Tell all slaves to close down, and exit the program
   mpi.close.Rslaves(dellog = TRUE)
+  
+  
 
   return(invisible())
 
