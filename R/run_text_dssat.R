@@ -1,5 +1,5 @@
 #' @export
-run_text_dssat <- function(n_dssat=3,
+run_text_dssat <- function(n_dssat=1,
                            trt_start,
                            trt_end,
                            dssat_csm = '/DSSAT47/dscsm047',
@@ -23,10 +23,11 @@ run_text_dssat <- function(n_dssat=3,
 
   total_trts = trt_end - trt_start + 1
 
-  max_cores <- Rmpi::mpi.universe.size()
+#  max_cores <- Rmpi::mpi.universe.size()
 
   if(n_dssat > total_trts) n_dssat <- total_trts
-  if(n_dssat > max_cores) n_dssat <- max_cores
+
+#  if(n_dssat > max_cores) n_dssat <- max_cores
 
   trtno <- trt_start:trt_end
 
