@@ -20,30 +20,34 @@ run_all_benchmarks <- function(dssat_csm = '/DSSAT47/dscsm047',
 
     benchmark_scenarios <- expand.grid(framework = c('NetCDF','Text'),
                                      ncores = seq(5,20,by=5),
-                                     csm = str_c(dirname(dssat_csm),'/dssat_',c('std','mpi'))) %>%
+                                     csm = str_c(dirname(dssat_csm),'/dscsm047_',c('std','mpi'))) %>%
       dplyr::filter( framework != "NetCDF" | str_detect(csm,'_mpi')) %>%
       dplyr::mutate(trt_start = 1,
                     trt_end = 7208,
                     nc_out_file = str_c('results/',
                                         time_stamp,'-',
                                         framework,'-',
-                                        basename(dssat_csm),'-',
+                                        basename(csm),'-',
                                         ncores,'cores','.nc'),
                     varlist = varlist) %>%
-      dplyr::sample_frac() %>%
+      dplyr::sample_frac()
+
+    saveRDS(benchmark_scenarios,str_c('results/',time_stamp,'-timings.rds'))
+
+    timings <- benchmark_scenarios %>%
       dplyr::rowwise() %>%
       dplyr::mutate(timings = list(system.time({run_framework(framework,
                                                               n_dssat = ncores,
                                                               trt_start = trt_start,
                                                               trt_end = trt_end,
-                                                              dssat_csm = dssat_csm,
+                                                              dssat_csm = csm,
                                                               filex = filex,
                                                               wth_file = wth_file,
                                                               sol_file = sol_file,
                                                               nc_out_file = nc_out_file)})))
 
-    saveRDS(benchmark_scenarios,str_c('results/',time_stamp,'-timings.rds'))
+    saveRDS(timings,str_c('results/',time_stamp,'-timings.rds'))
 
-    return(benchmark_scenarios)
+    return(invisible())
 }
 
