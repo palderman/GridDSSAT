@@ -3,7 +3,9 @@ run_all_benchmarks <- function(dssat_csm = '/DSSAT47/dscsm047',
                                filex = paste0(dirname(dssat_csm),'/GridDSSAT/GridDSSAT_filex.nc'),
                                wth_file = paste0(dirname(dssat_csm),'/Weather/idw.nc'),
                                sol_file = paste0(dirname(dssat_csm),'/Soil/statsgo_new.nc'),
-                               varlist = 'HWAM'){
+                               varlist = 'HWAM',
+                               trt_start = 1,
+                               trt_end = 7208){
 
     run_framework <- function(framework,...){
       if(framework == "NetCDF"){
@@ -21,9 +23,10 @@ run_all_benchmarks <- function(dssat_csm = '/DSSAT47/dscsm047',
     benchmark_scenarios <- expand.grid(framework = c('NetCDF','Text'),
                                      ncores = seq(5,20,by=5),
                                      csm = str_c(dirname(dssat_csm),'/dscsm047_',c('std','mpi'))) %>%
-      dplyr::filter( framework != "NetCDF" | str_detect(csm,'_mpi')) %>%
-      dplyr::mutate(trt_start = 1,
-                    trt_end = 7208,
+      dplyr::mutate(csm = as.character(csm)) %>%
+      dplyr::filter( framework != "NetCDF" | str_detect(csm,'_mpi')) %>%  
+      dplyr::mutate(trt_start = trt_start,
+                    trt_end = trt_end,
                     nc_out_file = str_c('results/',
                                         time_stamp,'-',
                                         framework,'-',
