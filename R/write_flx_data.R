@@ -188,7 +188,7 @@ write_flx_data <- function(nc_flx,CR,trno){
                                 IRRIG = ncvar_get(nc_flx, "IRRIG", start = c(1,treatments$SM), count = c(-1,1)),
                                 FERTI = ncvar_get(nc_flx, "FERTI", start = c(1,treatments$SM), count = c(-1,1)),
                                 RESID = ncvar_get(nc_flx, "RESID", start = c(1,treatments$SM), count = c(-1,1)),
-                                HARVS = ncvar_get(nc_flx, "HARVS", start = c(1,treatments$SM), count = c(-1,1)),
+                                HARVS = "M",
                                 OUTPUTS = "OU",
                                 FNAME = ncvar_get(nc_flx, "FNAME", start = c(1,treatments$SM), count = c(-1,1)),
                                 OVVEW = ncvar_get(nc_flx, "OVVEW", start = c(1,treatments$SM), count = c(-1,1)),
