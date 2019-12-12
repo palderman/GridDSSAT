@@ -21,10 +21,12 @@ run_all_benchmarks <- function(dssat_csm = '/DSSAT47/dscsm047',
       str_replace_all('[- ]+','_')
 
     benchmark_scenarios <- expand.grid(framework = c('NetCDF','Text'),
-                                     ncores = seq(5,20,by=5),
-                                     csm = str_c(dirname(dssat_csm),'/dscsm047_',c('std','mpi'))) %>%
-      dplyr::mutate(csm = as.character(csm)) %>%
-      dplyr::filter( framework != "NetCDF" | str_detect(csm,'_mpi')) %>%  
+                                       ncores = seq(5,20,by=5)) %>%
+        dplyr::mutate(csm = str_c(dirname(dssat_csm),
+                                  '/dscsm047_',
+                                  if_else(framework == 'Text',
+                                          'std',
+                                          'mpi'))) %>%
       dplyr::mutate(trt_start = trt_start,
                     trt_end = trt_end,
                     nc_out_file = str_c('results/',
