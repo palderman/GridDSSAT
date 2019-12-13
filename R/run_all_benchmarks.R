@@ -8,11 +8,15 @@ run_all_benchmarks <- function(dssat_csm = '/DSSAT47/dscsm047',
                                trt_end = 7208){
 
     run_framework <- function(framework,...){
+      arg_list <- deparse(list(...),width.cutoff=500L,nlines = 1)
       if(framework == "NetCDF"){
-        run_netcdf_dssat(...)
+        replacement <- "run_netcdf_dssat"
       }else if(framework == "Text"){
-        run_text_dssat(...)
+        replacement <- "run_text_dssat"
       }
+      sys_call <- str_replace(arg_list,"^list",replacement) %>%
+        str_c("R --no-restore -e 'library(GridDSSAT);",.,";mpi.quit()'")
+      system(sys_call)
     }
 
     if(!dir.exists('results')) dir.create('results')
