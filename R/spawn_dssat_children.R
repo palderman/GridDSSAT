@@ -33,6 +33,7 @@ spawn_dssat_children <- function(n_children,trtno,varlist,
     if(i <= total_trts %% n_children) ntrt <- ntrt + 1
     trts <- trtno[trt_ind:(trt_ind+ntrt-1)]
     mpi.send.Robj(trts,dest=i,tag=0)
+    trt_ind <- trt_ind + ntrt
   }
   mpi.bcast.cmd({trtno <- mpi.recv.Robj(0,0)})
 
