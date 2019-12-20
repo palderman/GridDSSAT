@@ -2,6 +2,7 @@
 
 export(construct_lat_lon_all)
 export(gen_all_sub_grids)
+export(generate_benchmarks_tbl)
 export(get_lat_lon_i)
 export(get_tunnel_distance_coordinates)
 export(open_nc_input)
