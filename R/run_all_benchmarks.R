@@ -10,12 +10,12 @@ run_all_benchmarks <- function(dssat_csm = '/DSSAT47/dscsm047',
     run_framework <- function(framework,...){
       arg_list <- deparse(list(...),width.cutoff=500L,nlines = 1)
       if(framework == "NetCDF"){
-        replacement <- "run_netcdf_dssat"
+        sys_call <- str_replace(arg_list,"^list","run_netcdf_dssat") %>%
+          str_c("R --no-restore -e 'library(GridDSSAT);",.,";mpi.quit()'")
       }else if(framework == "Text"){
-        replacement <- "run_text_dssat"
+        sys_call <- str_replace(arg_list,"^list","run_text_dssat") %>%
+          str_c("mpirun -n 1 R --no-restore -e 'library(GridDSSAT);",.,";mpi.quit()'")
       }
-      sys_call <- str_replace(arg_list,"^list",replacement) %>%
-        str_c("R --no-restore -e 'library(GridDSSAT);",.,";mpi.quit()'")
       system(sys_call)
     }
 
