@@ -54,12 +54,12 @@ write_sol_data <- function(nc_sol,lat,lon,lat_i,lon_i){
   v_fmt <- c(PEDON = "*%-10s", SOURCE = "  %-11s", TEXTURE = " %-5s", DEPTH = "%6.0f",
              DESCRIPTION = " %-s", SITE = "%-13s", COUNTRY = "%-12s", LAT = "%9.3f",
              LONG = "%9.3f", `SCS FAMILY` = " %-s", SCOM = "%6s", SALB = "%6.2f",
-             SLU1 = "%6.0f", SLDR = "%6.1f", SLRO = "%6.0f", SLNF = "%6.0f",
-             SLPF = "%6.0f", SMHB = "%6s", SMPX = "%6s", SMKE = "%6s", SLB = "%6.0f",
+             SLU1 = "%6.1f", SLDR = "%6.2f", SLRO = "%6.0f", SLNF = "%6.2f",
+             SLPF = "%6.2f", SMHB = "%6s", SMPX = "%6s", SMKE = "%6s", SLB = "%6.0f",
              SLMH = "%6s", SLLL = "%6.3f", SDUL = "%6.3f", SSAT = "%6.3f",
-             SRGF = "%6.3f", SSKS = "%6.3f", SBDM = "%6.2f", SLOC = "%6.2f",
-             SLCL = "%6.0f", SLSI = "%6.0f", SLCF = "%6.0f", SLNI = "%6.2f",
-             SLHW = "%6.1f", SLHB = "%6f", SCEC = "%6f", SADC = "%6f")
+             SRGF = "%6.3f", SSKS = "%6.2f", SBDM = "%6.2f", SLOC = "%6.2f",
+             SLCL = "%6.1f", SLSI = "%6.1f", SLCF = "%6.1f", SLNI = "%6.2f",
+             SLHW = "%6.1f", SLHB = "%6.1f", SCEC = "%6.1f", SADC = "%6.2f")
 
 
   tier_info <- list(c("PEDON", "SOURCE", "TEXTURE", "DEPTH", "DESCRIPTION"),
