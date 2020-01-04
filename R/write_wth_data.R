@@ -55,7 +55,7 @@ write_wth_data <- function(nc_wth,lat,lon,lat_i,lon_i){
                                   TMAX = "%6.1f",
                                   TMIN = "%6.1f",
                                   RAIN = "%6.1f",
-                                  WIND = "%6.1f",
+                                  WIND = "%6.0f",
                                   RHUM = "%6.1f"))
 
   attr(daily_wth,"GENERAL") <- GENERAL
